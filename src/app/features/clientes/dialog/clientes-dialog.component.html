@@ -1,0 +1,59 @@
+<!-- src/app/features/clientes/clientes-dialog.component.html -->
+<h2 mat-dialog-title>
+  {{ data.item ? 'Editar Cliente' : 'Nuevo Cliente' }}
+</h2>
+
+<mat-dialog-content>
+  <div class="dialog-form" [formGroup]="form">
+    <br>
+    <!-- Nombre -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Nombre del cliente" formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('nombre')?.hasError('minlength')">
+        Debe tener al menos 3 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <!-- RUC -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>RUC</mat-label>
+      <input matInput placeholder="11 dígitos" formControlName="ruc" maxlength="11" />
+      <mat-error *ngIf="form.get('ruc')?.hasError('required')">
+        El RUC es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('ruc')?.hasError('pattern')">
+        Debe ser un RUC válido (11 dígitos)
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Dirección -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Dirección</mat-label>
+      <input matInput placeholder="Dirección del cliente" formControlName="direccion" />
+      <mat-error *ngIf="form.get('direccion')?.hasError('required')">
+        La dirección es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Teléfono -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Teléfono</mat-label>
+      <input matInput type="tel" placeholder="9 dígitos" formControlName="telefono" maxlength="9" />
+      <mat-error *ngIf="form.get('telefono')?.hasError('required')">
+        El teléfono es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('telefono')?.hasError('pattern')">
+        Debe ser un número válido (9 dígitos)
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

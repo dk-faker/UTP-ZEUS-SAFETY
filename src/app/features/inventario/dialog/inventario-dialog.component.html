@@ -1,0 +1,70 @@
+<!-- src/app/features/inventario/inventario-dialog.component.html -->
+
+<h2 mat-dialog-title>
+  {{ data.item ? 'Editar Ítem de Inventario' : 'Nuevo Ítem de Inventario' }}
+</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <br>
+  <!-- Producto -->
+  <mat-form-field appearance="outline" class="dialog-input">
+    <mat-label>Producto</mat-label>
+    <input matInput placeholder="Nombre del producto" formControlName="producto" />
+    <mat-error *ngIf="form.get('producto')?.hasError('required')">
+      El nombre es requerido
+    </mat-error>
+    <mat-error *ngIf="form.get('producto')?.hasError('minlength')">
+      Debe tener al menos 3 caracteres
+    </mat-error>
+  </mat-form-field>
+
+  <!-- SKU -->
+  <mat-form-field appearance="outline" class="dialog-input">
+    <mat-label>Código</mat-label>
+    <input matInput placeholder="Código" formControlName="sku" />
+    <mat-error *ngIf="form.get('sku')?.hasError('required')">
+      El Código es requerido
+    </mat-error>
+    <mat-error *ngIf="form.get('sku')?.hasError('minlength')">
+      Debe tener al menos 3 caracteres
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Categoría -->
+  <mat-form-field appearance="outline" class="dialog-input">
+    <mat-label>Categoría</mat-label>
+    <input matInput placeholder="Categoría" formControlName="categoria" />
+    <mat-error *ngIf="form.get('categoria')?.hasError('required')">
+      La categoría es requerida
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Cantidad -->
+  <mat-form-field appearance="outline" class="dialog-input">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" placeholder="0" formControlName="cantidad" />
+    <mat-error *ngIf="form.get('cantidad')?.hasError('required')">
+      La cantidad es requerida
+    </mat-error>
+    <mat-error *ngIf="form.get('cantidad')?.hasError('min')">
+      Debe ser un valor mayor o igual a 0
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Precio Unitario -->
+  <mat-form-field appearance="outline" class="dialog-input">
+    <mat-label>Precio Unitario (S/.)</mat-label>
+    <input matInput type="number" placeholder="0.00" formControlName="precioUnitario" />
+    <mat-error *ngIf="form.get('precioUnitario')?.hasError('required')">
+      El precio es requerido
+    </mat-error>
+    <mat-error *ngIf="form.get('precioUnitario')?.hasError('min')">
+      Debe ser un valor mayor o igual a 0
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-nav-list>
+      <mat-list-item routerLink="/dashboard/clientes" routerLinkActive="active-link">
+        <mat-icon matListIcon>people</mat-icon>
+        <span matLine>Clientes</span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dashboard/inventario" routerLinkActive="active-link">
+        <mat-icon matListIcon>inventory_2</mat-icon>
+        <span matLine>Inventario</span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dashboard/ventas" routerLinkActive="active-link">
+        <mat-icon matListIcon>point_of_sale</mat-icon>
+        <span matLine>Ventas</span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dashboard/compras" routerLinkActive="active-link">
+        <mat-icon matListIcon>shopping_cart</mat-icon>
+        <span matLine>Compras</span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dashboard/personal" routerLinkActive="active-link">
+        <mat-icon matListIcon>badge</mat-icon>
+        <span matLine>Personal</span>
+      </mat-list-item>
+
+      <mat-list-item routerLink="/dashboard/reportes" routerLinkActive="active-link">
+        <mat-icon matListIcon>bar_chart</mat-icon>
+        <span matLine>Reportes</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Aquí irán las rutas hijas (router-outlet) -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

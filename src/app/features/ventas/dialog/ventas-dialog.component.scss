@@ -1,0 +1,14 @@
+/* src/app/features/ventas/ventas-dialog.component.scss */
+
+/* Nos aseguramos de que el contenedor padre ponga todo en columna */
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada campo ocupa 100% del ancho y se separa del siguiente */
+.dialog-input {
+  width: 100%;
+  margin-bottom: 16px;
+  display: block;
+}

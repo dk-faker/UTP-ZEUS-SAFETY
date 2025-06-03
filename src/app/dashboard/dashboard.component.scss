@@ -1,0 +1,5 @@
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 64px); /* toolbar de 64px */
+}

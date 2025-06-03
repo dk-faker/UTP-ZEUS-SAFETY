@@ -1,0 +1,91 @@
+/* ...resto de tu SCSS ya existente... */
+
+/* Asegurémonos de que la tabla ocupe todo el ancho disponible */
+.tabla-card {
+  width: 100%;
+  margin-bottom: 24px;
+  overflow-x: auto; /* permite scroll horizontal si es necesario */
+
+  /* Hacemos que la tabla use ancho completo y layout fijo para respetar anchos */
+  table.mat-elevation-z1 {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  /* Ajustamos la columna “nombre” para que sea más ancha */
+  th.mat-column-nombre,
+  td.mat-column-nombre {
+    /* Por ejemplo, asignamos un ancho fijo de 200px */
+    min-width: 200px;
+    max-width: 250px;
+    /* Si prefieres un ancho mínimo y que crezca en pantallas grandes, puedes usar:
+    width: 200px;
+    */
+    /* Opcional: si quieres que el texto salte de línea en caso de ser muy largo:
+    word-wrap: break-word;
+    */
+  }
+
+  /* Opcional: si quieres darle algo más de padding solo a esa columna */
+  th.mat-column-nombre,
+  td.mat-column-nombre {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* --------- Restantes estilos del componente --------- */
+
+/* Tarjeta exterior: rodea todo el contenido de Gestión de Clientes */
+.clientes-card {
+  margin: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado con título + botón */
+.header-clientes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+    color: #333333;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+/* Tarjeta “placeholder” para el formulario */
+.formulario-placeholder {
+  width: 100%;
+  padding: 24px;
+  border: 1px dashed #cccccc;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fafafa;
+
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #555555;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: #777777;
+  }
+}

@@ -1,0 +1,56 @@
+<!-- src/app/login/login.component.html -->
+<div class="login-page-container">
+
+  <!-- Columna izquierda: ilustración -->
+  <div class="login-illustration">
+    <img src="images/logobox.png" alt="Ilustración Login" />
+  </div>
+
+  <!-- Columna derecha: form dentro de un Card -->
+  <div class="login-form-container">
+    <mat-card class="login-card">
+      <!-- Logo grande -->
+      <div class="logo-wrapper">
+        <img src="images/zeus.png" alt="Logo Zeus Safety" class="login-logo" />
+      </div>
+
+      <!-- Título -->
+      <h2 class="login-title">Ingrese a su cuenta</h2>
+
+      <!-- Formulario -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="input-full">
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput placeholder="Usuario" formControlName="username" />
+          <mat-error *ngIf="form.get('username')?.hasError('required')">
+            El usuario es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-full">
+          <mat-icon matPrefix>lock</mat-icon>
+          <input matInput type="password" placeholder="Contraseña" formControlName="password" />
+          <mat-error *ngIf="form.get('password')?.hasError('required')">
+            La contraseña es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="btn-login" type="submit"
+                [disabled]="form.invalid || loading()">
+          <ng-container *ngIf="!loading(); else loadingTpl">
+            Ingresar
+          </ng-container>
+          <ng-template #loadingTpl>
+            <mat-progress-spinner diameter="24" mode="indeterminate" strokeWidth="3"></mat-progress-spinner>
+          </ng-template>
+        </button>
+
+        <div *ngIf="errorMessage()" class="login-error">
+          {{ errorMessage() }}
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
+
+

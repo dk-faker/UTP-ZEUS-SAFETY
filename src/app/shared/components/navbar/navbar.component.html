@@ -1,0 +1,30 @@
+<mat-toolbar class="zeus-toolbar">
+  <div class="toolbar-left">
+    <img src="images/zeus.png" alt="Zeus Safety" class="logo" />
+    <span class="brand">Zeus Safety</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="toolbar-center">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar productos...</mat-label>
+      <input matInput placeholder="¿Qué estás buscando?" />
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Salir</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

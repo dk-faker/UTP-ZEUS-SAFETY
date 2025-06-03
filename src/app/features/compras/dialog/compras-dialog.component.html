@@ -1,0 +1,67 @@
+<!-- src/app/features/compras/compras-dialog.component.html -->
+
+<h2 mat-dialog-title>
+  {{ data.item ? 'Editar Compra' : 'Nueva Compra' }}
+</h2>
+
+<mat-dialog-content>
+  <div class="dialog-form" [formGroup]="form">
+    <br>
+    <!-- Fecha -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fecha" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('fecha')?.hasError('required')">
+        La fecha es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Proveedor -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Proveedor</mat-label>
+      <input
+        matInput
+        placeholder="Nombre del proveedor"
+        formControlName="proveedor"
+      />
+      <mat-error *ngIf="form.get('proveedor')?.hasError('required')">
+        El proveedor es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('proveedor')?.hasError('minlength')">
+        Debe tener al menos 3 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Total -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Total (S/.)</mat-label>
+      <input matInput type="number" placeholder="0.00" formControlName="total" />
+      <mat-error *ngIf="form.get('total')?.hasError('required')">
+        El total es requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('total')?.hasError('min')">
+        Debe ser un valor mayor o igual a 0.01
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Estado -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="Pendiente">Pendiente</mat-option>
+        <mat-option value="Recibida">Recibida</mat-option>
+        <mat-option value="Cancelada">Cancelada</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('estado')?.hasError('required')">
+        El estado es requerido
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

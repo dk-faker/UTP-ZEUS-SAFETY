@@ -1,0 +1,110 @@
+/* src/app/features/inventario/inventario.component.scss */
+
+/* Tarjeta exterior: envuelve todo el Inventario */
+.inventario-card {
+  margin: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado con título + botón */
+.header-inventario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+    color: #333333;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+/* Tarjeta de la tabla (ancho completo) */
+.tabla-card {
+  width: 100%;
+  margin-bottom: 24px;
+  overflow-x: auto; /* para pantallas pequeñas, scroll horizontal */
+
+  .table-container {
+    width: 100%;
+  }
+
+  table.mat-elevation-z1 {
+    width: 100%;
+    table-layout: fixed; /* Respetar los anchos de columna fijos/relativos */
+    min-width: 700px;     /* Ajusta según necesites para que no se compriman demasiado */
+
+    th.mat-header-cell,
+    td.mat-cell {
+      padding: 12px 16px;
+    }
+
+    th.mat-header-cell {
+      font-weight: 600;
+      background-color: #fafafa;
+    }
+
+    /* Hacemos la columna “producto” más ancha para nombres largos */
+    th.mat-column-producto,
+    td.mat-column-producto {
+      min-width: 200px;
+      max-width: 250px;
+      /* Opcional: para que el texto se rompa si es demasiado largo */
+      word-wrap: break-word;
+    }
+
+    /* Puedes ajustar otras columnas si lo consideras necesario */
+    th.mat-column-categoria,
+    td.mat-column-categoria {
+      min-width: 150px;
+    }
+  }
+
+  /* Fila cuando no hay datos */
+  .no-data-row {
+    td {
+      text-align: center;
+      padding: 24px;
+    }
+    .no-data {
+      color: #777777;
+      font-size: 16px;
+      font-style: italic;
+    }
+  }
+}
+
+/* Tarjeta “placeholder” para el formulario */
+.formulario-placeholder {
+  width: 100%;
+  padding: 24px;
+  border: 1px dashed #cccccc;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fafafa;
+
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: #555555;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: #777777;
+  }
+}

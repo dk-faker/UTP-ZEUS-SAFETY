@@ -1,0 +1,17 @@
+.sidenav-container {
+  height: calc(100vh - 64px); /* Resto de altura tras toolbar (64px) */
+  margin-top: 64px;            /* Para “bajar” del toolbar */
+}
+
+.sidenav {
+  width: 200px;
+  background: white;
+}
+
+.active-link {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+mat-list-item {
+  cursor: pointer;
+}
