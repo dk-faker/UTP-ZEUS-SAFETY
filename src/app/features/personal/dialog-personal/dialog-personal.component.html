@@ -1,0 +1,67 @@
+<div class="fnd">
+    <h2 mat-dialog-title>Favorite Animal</h2>
+<mat-dialog-content class="dialogo">
+    <div class="contenido">
+         <table class="example-full-width " cellspacing="0"><tr>
+    
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombres</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Apellidos</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>N° DNI</mat-label>
+      <input matInput>
+    </mat-form-field>
+     <mat-form-field>
+  <mat-label >Fecha de Nacimiento</mat-label>
+  <input matInput [matDatepicker]="picker">
+  
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+    <mat-form-field>
+  <mat-label>Genero</mat-label>
+  <mat-select disableRipple>
+    <mat-option value="1">M</mat-option>
+    <mat-option value="2">F</mat-option>
+  </mat-select>
+</mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Area</mat-label>
+      <input matInput>
+    </mat-form-field>
+     <mat-form-field>
+  <mat-label>Estado</mat-label>
+  <mat-select disableRipple>
+    <mat-option value="1">Activo</mat-option>
+    <mat-option value="2">Inactivo</mat-option>
+    <mat-option value="2">Cesado</mat-option>
+  </mat-select>
+</mat-form-field>
+ <mat-form-field>
+  <mat-label >Fecha de ingreso</mat-label>
+  <input matInput [matDatepicker]="picker">
+  
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+   
+    
+  </tr></table>
+    </div>
+ 
+ 
+  
+</mat-dialog-content>
+<div class="btn">
+    <button mat-button (click)="cancelar()" >Basic</button>
+<button mat-flat-button (click)="registrar()">Registrar</button>
+
+
+</div>
+</div>
