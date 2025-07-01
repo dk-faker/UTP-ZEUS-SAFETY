@@ -1,6 +1,6 @@
 // src/app/features/personal/personal.component.ts
 import { Component,AfterViewInit,ViewChild,inject} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule ,formatDate} from '@angular/common';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -20,42 +20,99 @@ import {DialogPersonalComponent} from './dialog-personal/dialog-personal.compone
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.scss']
 })
-export class PersonalComponent implements AfterViewInit {
+export class PersonalComponent  {
+  personal: any[] = [];
+  dataSource = new MatTableDataSource<any>(this.personal);
   displayedColumns: string[] = ['id', 'nombres', 'apellidos', 'dni','fechana','genero','area','estado','ingreso','acciones'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  dialog = inject(MatDialog);
+  idContador = 1;
+  
+  constructor(private dialogo: MatDialog) {}
+  
+  
   registrar(){
-    this.dialog.open(DialogPersonalComponent , {
-      
+    const dialogRef = this.dialogo.open(DialogPersonalComponent);
+
+    dialogRef.afterClosed().subscribe((registro) => {
+      if (registro) {
+        registro.id = this.idContador++;
+
+        registro.estado = parseInt(registro.estado);
+        registro.genero = parseInt(registro.genero);
+
+        registro.fechana = formatDate(registro.fechana, 'dd-MM-yy', 'en-US');
+        registro.ingreso = formatDate(registro.ingreso, 'dd-MM-yy', 'en-US');
+
+        this.personal.push(registro);
+        this.dataSource.data = [...this.personal]; 
+      }
     });
   }
-  editar(){
-    this.dialog.open(DialogPersonalComponent,{})
-  }
-  eliminar(){
+  editar(element: any) {
+     const elementoConvertido = {
+    ...element,
+    fechana: this.convertirFechaStringADate(element.fechana),
+    ingreso: this.convertirFechaStringADate(element.ingreso),
 
-  }
+    estado: Number(element.estado),  
+    genero: Number(element.genero) 
+  };
+
+  const dialogoEd = this.dialogo.open(DialogPersonalComponent, {
+    data:  elementoConvertido 
+  });
+
+  dialogoEd.afterClosed().subscribe((registroEd) => {
+    if (registroEd) {
+
+      registroEd.estado = Number(registroEd.estado);
+      registroEd.genero = Number(registroEd.genero);
+
+      registroEd.fechana = formatDate(registroEd.fechana, 'dd-MM-yy', 'en-US');
+      registroEd.ingreso = formatDate(registroEd.ingreso, 'dd-MM-yy', 'en-US');
+
+      const index = this.personal.findIndex(p => p.id === registroEd.id);
+      if (index !== -1) {
+        this.personal[index] = registroEd;
+        this.dataSource.data = [...this.personal]; 
+      }
+    }
+  });
 }
-export interface PeriodicElement {
-  id:number;
-  nombres: string;
-  apellidos: string;
-  dni: number;
-  fechana: string;
-  genero:string;
-  area:string;
-  estado:string;
-  ingreso:String;
+convertirFechaStringADate(fechaString: string): Date | null {
+  const partes = fechaString.split('-');
+  if (partes.length === 3) {
+    const [dia, mes, anio] = partes.map(part => parseInt(part, 10));
+    return new Date(anio, mes - 1, dia);
+  }
+  return null;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {id: 1, nombres: 'atwa', apellidos: 'garcia', dni: 1245789,fechana:'14-02-25',genero:'M',area:'prueba',estado:'Activo',ingreso:'10-01-23'},
-  {id: 2, nombres: 'carlos', apellidos: 'tapia', dni: 1245789,fechana:'10-02-25',genero:'M',area:'prueba',estado:'Cesado',ingreso:'10-01-23'}
+  eliminar(element: any) {
+    this.personal = this.personal.filter(p => p.id !== element.id);
+    this.dataSource.data = [...this.personal];
+  }
+
   
-];
+  NombreEstado(estado: number): string {
+  switch (estado) {
+    case 1:
+      return 'Activo';
+    case 2:
+      return 'Inactivo';
+    case 3:
+      return 'Cesado';
+    default:
+      return 'Desconocido';
+  }
+}
+Genero(genero:number):string{
+  switch (genero) {
+    case 1:
+      return 'Masculino';
+    case 2:
+      return 'Femenino';
+    default:
+      return 'Desconocido';
+  }
+}
+}

@@ -2,7 +2,7 @@
   <h2>Gestión de Personal</h2>
   
   <button mat-flat-button class='botonRegistrar' (click)="registrar()" >Nuevo personal</button>
-<div class="tabla" *ngIf="dataSource.data.length > 0">
+<div class="tabla" >
   <div class="tablacont">
   <table mat-table [dataSource]="dataSource">
 
@@ -32,7 +32,7 @@
     </ng-container>
     <ng-container matColumnDef="genero">
       <th mat-header-cell *matHeaderCellDef> Genero </th>
-      <td mat-cell *matCellDef="let element"> {{element.genero}} </td>
+      <td mat-cell *matCellDef="let element"> {{Genero(element.genero)}} </td>
     </ng-container>
     <ng-container matColumnDef="area">
       <th mat-header-cell *matHeaderCellDef> Área </th>
@@ -40,7 +40,7 @@
     </ng-container>
     <ng-container matColumnDef="estado">
       <th mat-header-cell *matHeaderCellDef> Estado </th>
-      <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+      <td mat-cell *matCellDef="let element">  {{ NombreEstado(element.estado) }} </td>
     </ng-container>
     <ng-container matColumnDef="ingreso">
       <th mat-header-cell *matHeaderCellDef> Fecha de Ingreso </th>
@@ -49,10 +49,10 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef>Acciones </th>
       <td mat-cell *matCellDef="let element"> 
-        <button *ngIf="dataSource.data.length > 0" mat-icon-button color="primary" (click)="editar()">
+        <button *ngIf="dataSource.data.length > 0" mat-icon-button color="primary" (click)="editar(element)">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-icon-button color="warn" (click)="eliminar()">
+    <button mat-icon-button color="warn" (click)="eliminar(element)">
   <mat-icon>delete</mat-icon>
 </button>
    </td>
