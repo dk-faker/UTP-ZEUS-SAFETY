@@ -55,6 +55,7 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {id: 1, nombres: 'atwa', apellidos: 'garcia', dni: 1245789,fechana:'14-02-25',genero:'H',area:'prueba',estado:'A',ingreso:'10-01-23'}
+  {id: 1, nombres: 'atwa', apellidos: 'garcia', dni: 1245789,fechana:'14-02-25',genero:'M',area:'prueba',estado:'Activo',ingreso:'10-01-23'},
+  {id: 2, nombres: 'carlos', apellidos: 'tapia', dni: 1245789,fechana:'10-02-25',genero:'M',area:'prueba',estado:'Cesado',ingreso:'10-01-23'}
   
 ];
