@@ -1,16 +1,14 @@
 // src/app/features/personal/personal.component.ts
-import { Component,AfterViewInit,ViewChild,inject} from '@angular/core';
+import { Component} from '@angular/core';
 import { CommonModule ,formatDate} from '@angular/common';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
+ 
 } from '@angular/material/dialog';
 import {DialogPersonalComponent} from './dialog-personal/dialog-personal.component';
 @Component({
