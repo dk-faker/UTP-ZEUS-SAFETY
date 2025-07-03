@@ -17,9 +17,10 @@ import { MaterialModule } from '../../../shared/material';
 export interface Cliente {
   id: number;
   nombre: string;
+  tipo_cliente: string;
   ruc: string;
-  direccion: string;
   telefono: string;
+  lugar: string;
 }
 
 /** Datos que el diálogo puede recibir (para editar) */
@@ -49,9 +50,10 @@ export class ClientesDialogComponent {
     // Si data.item existe, precargamos para editar; si no, es creación
     this.form = this.fb.group({
       nombre: [data.item?.nombre || '', [Validators.required, Validators.minLength(3)]],
-      ruc: [data.item?.ruc || '', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      direccion: [data.item?.direccion || '', Validators.required],
-      telefono: [data.item?.telefono || '', [Validators.required, Validators.pattern(/^\d{9}$/)]]
+      tipo_cliente: [data.item?.tipo_cliente || '', Validators.required],
+      ruc: [data.item?.ruc || '', [Validators.required, Validators.pattern(/^[0-9]{11}$/)]],
+      telefono: [data.item?.telefono || '', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
+      lugar: [data.item?.lugar || '', Validators.required]
     });
   }
 
@@ -69,9 +71,10 @@ export class ClientesDialogComponent {
     const result: Cliente = {
       id: this.data.item?.id ?? 0,
       nombre: this.form.value.nombre,
+      tipo_cliente: this.form.value.tipo_cliente,
       ruc: this.form.value.ruc,
-      direccion: this.form.value.direccion,
-      telefono: this.form.value.telefono
+      telefono: this.form.value.telefono,
+      lugar: this.form.value.lugar
     };
     this.dialogRef.close(result);
   }

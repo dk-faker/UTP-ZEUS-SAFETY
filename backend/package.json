@@ -1,0 +1,18 @@
+{
+  "name": "utp-zeus-safety-backend",
+  "version": "1.0.0",
+  "description": "Backend para UTP-ZEUS-SAFETY (API REST para clientes)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.9.7",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+} 

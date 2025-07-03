@@ -18,6 +18,15 @@
       </mat-error>
     </mat-form-field>
 
+    <!-- Tipo de Cliente -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Tipo de Cliente</mat-label>
+      <input matInput placeholder="Ej: Natural o Jurídico" formControlName="tipo_cliente" />
+      <mat-error *ngIf="form.get('tipo_cliente')?.hasError('required')">
+        El tipo de cliente es requerido
+      </mat-error>
+    </mat-form-field>
+
     <!-- RUC -->
     <mat-form-field appearance="outline" class="dialog-input">
       <mat-label>RUC</mat-label>
@@ -30,15 +39,6 @@
       </mat-error>
     </mat-form-field>
 
-    <!-- Dirección -->
-    <mat-form-field appearance="outline" class="dialog-input">
-      <mat-label>Dirección</mat-label>
-      <input matInput placeholder="Dirección del cliente" formControlName="direccion" />
-      <mat-error *ngIf="form.get('direccion')?.hasError('required')">
-        La dirección es requerida
-      </mat-error>
-    </mat-form-field>
-
     <!-- Teléfono -->
     <mat-form-field appearance="outline" class="dialog-input">
       <mat-label>Teléfono</mat-label>
@@ -48,6 +48,15 @@
       </mat-error>
       <mat-error *ngIf="form.get('telefono')?.hasError('pattern')">
         Debe ser un número válido (9 dígitos)
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Lugar -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Lugar</mat-label>
+      <input matInput placeholder="Ciudad o distrito" formControlName="lugar" />
+      <mat-error *ngIf="form.get('lugar')?.hasError('required')">
+        El lugar es requerido
       </mat-error>
     </mat-form-field>
   </div>

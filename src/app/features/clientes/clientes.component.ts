@@ -1,5 +1,5 @@
 // src/app/features/clientes/clientes.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule }      from '@angular/material/card';
 import { MatTableModule }     from '@angular/material/table';
@@ -7,9 +7,12 @@ import { MatButtonModule }    from '@angular/material/button';
 import { MatIconModule }      from '@angular/material/icon';
 import { MatTooltipModule }   from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MaterialModule } from '../../shared/material';
 import { ClientesDialogComponent, Cliente } from './dialog/clientes-dialog.component';
+import { ClientesService } from './clientes.service';
 
 @Component({
   selector: 'app-clientes',
@@ -22,24 +25,44 @@ import { ClientesDialogComponent, Cliente } from './dialog/clientes-dialog.compo
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss']
 })
-export class ClientesComponent {
+export class ClientesComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'nombre',
+    'tipo_cliente',
     'ruc',
-    'direccion',
     'telefono',
+    'lugar',
     'acciones'
   ];
   dataSource: Cliente[] = [];
   private nextId = 1;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private clientesService: ClientesService,
+    private snackBar: MatSnackBar
+  ) {}
+
+  private cargarClientes() {
+    this.clientesService.getClientes().subscribe({
+      next: (clientes) => this.dataSource = clientes,
+      error: (err) => {
+        this.dataSource = [];
+        this.snackBar.open('Error al cargar clientes', 'Cerrar', { duration: 3000 });
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.cargarClientes();
+  }
 
   /** Abre el diálogo para crear un nuevo cliente */
   nuevoCliente() {
@@ -49,8 +72,14 @@ export class ClientesComponent {
     });
     dialogRef.afterClosed().subscribe((result: Cliente | undefined) => {
       if (result) {
-        result.id = this.nextId++;
-        this.dataSource = [...this.dataSource, result];
+        const { id, ...clienteSinId } = result;
+        this.clientesService.crearCliente(clienteSinId).subscribe({
+          next: () => {
+            this.snackBar.open('Cliente creado exitosamente', 'Cerrar', { duration: 2500 });
+            this.cargarClientes();
+          },
+          error: () => this.snackBar.open('Error al crear cliente', 'Cerrar', { duration: 3000 })
+        });
       }
     });
   }
@@ -63,9 +92,14 @@ export class ClientesComponent {
     });
     dialogRef.afterClosed().subscribe((result: Cliente | undefined) => {
       if (result) {
-        this.dataSource = this.dataSource.map((c) =>
-          c.id === result.id ? { ...result } : c
-        );
+        const { id, ...clienteSinId } = result;
+        this.clientesService.actualizarCliente(id, clienteSinId).subscribe({
+          next: () => {
+            this.snackBar.open('Cliente actualizado', 'Cerrar', { duration: 2500 });
+            this.cargarClientes();
+          },
+          error: () => this.snackBar.open('Error al actualizar cliente', 'Cerrar', { duration: 3000 })
+        });
       }
     });
   }
@@ -74,7 +108,13 @@ export class ClientesComponent {
   eliminarCliente(item: Cliente) {
     const confirmDelete = confirm(`¿Eliminar al cliente "${item.nombre}"?`);
     if (confirmDelete) {
-      this.dataSource = this.dataSource.filter((c) => c.id !== item.id);
+      this.clientesService.eliminarCliente(item.id).subscribe({
+        next: () => {
+          this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 2500 });
+          this.cargarClientes();
+        },
+        error: () => this.snackBar.open('Error al eliminar cliente', 'Cerrar', { duration: 3000 })
+      });
     }
   }
 }

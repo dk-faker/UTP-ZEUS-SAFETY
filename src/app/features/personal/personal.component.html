@@ -1,4 +1,84 @@
 <div class="section-container">
-  <h2>Gestión de Personal</h2>
-  <p>Pantalla para registrar/editar personal y roles.</p>
 </div>
+
+<mat-card class="personal-card">
+  <!-- Encabezado: título + botón "Nuevo Personal" -->
+  <div class="header-personal">
+    <h1>Gestión de Personal</h1>
+    <button mat-flat-button color="primary" (click)="nuevoPersonal()">
+      <mat-icon>person_add</mat-icon>
+      Nuevo Personal
+    </button>
+  </div>
+
+  <!-- Tarjeta secundaria para la tabla -->
+  <mat-card class="tabla-card">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+      <!-- Columna ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna Rol -->
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef> ROL </th>
+        <td mat-cell *matCellDef="let row">{{ row.rol }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna Usuario -->
+      <ng-container matColumnDef="nombre_usuario">
+        <th mat-header-cell *matHeaderCellDef> USUARIO </th>
+        <td mat-cell *matCellDef="let row">{{ row.nombre_usuario }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna Clave -->
+      <ng-container matColumnDef="clave">
+        <th mat-header-cell *matHeaderCellDef> CLAVE </th>
+        <td mat-cell *matCellDef="let row">{{ row.clave }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna ID Rol -->
+      <ng-container matColumnDef="id_rol">
+        <th mat-header-cell *matHeaderCellDef> ID ROL </th>
+        <td mat-cell *matCellDef="let row">{{ row.id_rol }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna Fecha Creación -->
+      <ng-container matColumnDef="fecha_creacion">
+        <th mat-header-cell *matHeaderCellDef> FECHA CREACIÓN </th>
+        <td mat-cell *matCellDef="let row">{{ row.fecha_creacion }}</td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Columna Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button color="accent" (click)="editarPersonal(row)" matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminarPersonal(row)" matTooltip="Eliminar">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+      <!-- Definición de filas de encabezado, contenido y pie (pie vacío) -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      <!-- Mensaje cuando no hay datos -->
+      <tr class="no-data-row" *ngIf="dataSource.length === 0">
+        <td colspan="8">
+          <div class="no-data">No hay personal registrado todavía.</div>
+        </td>
+      </tr>
+    </table>
+  </mat-card>
+
+  <!-- Espacio reservado para el formulario de creación/edición de personal -->
+  <mat-card class="formulario-placeholder">
+    <h3>Formulario de Personal</h3>
+    
+  </mat-card>
+</mat-card>
