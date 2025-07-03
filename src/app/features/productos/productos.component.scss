@@ -1,0 +1,76 @@
+.tabla-card {
+  width: 100%;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  table.mat-elevation-z1 {
+    width: 100%;
+    table-layout: fixed;
+  }
+  th.mat-column-codigo,
+  td.mat-column-codigo {
+    min-width: 120px;
+    max-width: 180px;
+  }
+  th.mat-column-categoria,
+  td.mat-column-categoria {
+    min-width: 120px;
+    max-width: 180px;
+  }
+  th.mat-column-tipo,
+  td.mat-column-tipo {
+    min-width: 120px;
+    max-width: 180px;
+  }
+  th.mat-column-color_tipo,
+  td.mat-column-color_tipo {
+    min-width: 120px;
+    max-width: 180px;
+  }
+  th.mat-column-tamano,
+  td.mat-column-tamano {
+    min-width: 120px;
+    max-width: 180px;
+  }
+  th.mat-column-pares_por_caja,
+  td.mat-column-pares_por_caja {
+    min-width: 120px;
+    max-width: 180px;
+  }
+}
+
+.productos-card {
+  margin: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-productos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+    color: #333333;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.formulario-placeholder {
+  width: 100%;
+  padding: 24px;
+  border: 1px dashed #cccccc;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #fafafa;
+} 

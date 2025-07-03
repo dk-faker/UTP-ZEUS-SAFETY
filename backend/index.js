@@ -133,6 +133,66 @@ app.delete('/api/personal/:id', (req, res) => {
   });
 });
 
+app.get('/api/productos', (req, res) => {
+  const sql = `
+    SELECT 
+      CODIGO AS codigo, 
+      CATEGORIA AS categoria, 
+      TIPO_PRODUCTO AS tipo, 
+      COLOR_O_TIPO AS color_tipo, 
+      TAMANO AS tamano, 
+      PARES_POR_CAJA AS pares_por_caja 
+    FROM productos
+  `;
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error al obtener productos:', err);
+      return res.status(500).json({ error: 'Error al obtener productos' });
+    }
+    res.json(results);
+  });
+});
+
+// Crear un producto
+app.post('/api/productos', (req, res) => {
+  const { codigo, categoria, tipo, color_tipo, tamano, pares_por_caja } = req.body;
+  const sql = 'INSERT INTO productos (CODIGO, CATEGORIA, TIPO_PRODUCTO, COLOR_O_TIPO, TAMANO, PARES_POR_CAJA) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(sql, [codigo, categoria, tipo, color_tipo, tamano, pares_por_caja], (err, result) => {
+    if (err) {
+      console.error('Error al crear producto:', err);
+      return res.status(500).json({ error: 'Error al crear producto' });
+    }
+    res.json({ codigo, categoria, tipo, color_tipo, tamano, pares_por_caja });
+  });
+});
+
+// Actualizar un producto
+app.put('/api/productos/:codigo', (req, res) => {
+  const { codigo } = req.params;
+  const { categoria, tipo, color_tipo, tamano, pares_por_caja } = req.body;
+  const sql = 'UPDATE productos SET CATEGORIA=?, TIPO_PRODUCTO=?, COLOR_O_TIPO=?, TAMANO=?, PARES_POR_CAJA=? WHERE CODIGO=?';
+  db.query(sql, [categoria, tipo, color_tipo, tamano, pares_por_caja, codigo], (err) => {
+    if (err) {
+      console.error('Error al actualizar producto:', err);
+      return res.status(500).json({ error: 'Error al actualizar producto' });
+    }
+    res.json({ codigo, categoria, tipo, color_tipo, tamano, pares_por_caja });
+  });
+});
+
+// Eliminar un producto
+app.delete('/api/productos/:codigo', (req, res) => {
+  const { codigo } = req.params;
+  const sql = 'DELETE FROM productos WHERE CODIGO=?';
+  db.query(sql, [codigo], (err) => {
+    if (err) {
+      console.error('Error al eliminar producto:', err);
+      return res.status(500).json({ error: 'Error al eliminar producto' });
+    }
+    res.json({ success: true });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en http://localhost:${PORT}`);
 }); 

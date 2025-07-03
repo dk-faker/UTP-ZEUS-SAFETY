@@ -9,6 +9,7 @@ import { VentasComponent } from './features/ventas/ventas.component';
 import { ComprasComponent } from './features/compras/compras.component';
 import { PersonalComponent } from './features/personal/personal.component';
 import { ReportesComponent } from './features/reportes/reportes.component';
+import { ProductosComponent } from './features/productos/productos.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ export const appRoutes: Routes = [
       { path: 'compras', component: ComprasComponent },
       { path: 'personal', component: PersonalComponent },
       { path: 'reportes', component: ReportesComponent },
+      { path: 'productos', component: ProductosComponent },
       { path: '', redirectTo: 'clientes', pathMatch: 'full' }
     ]
   },

@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>
+  {{ data.item ? 'Editar Producto' : 'Nuevo Producto' }}
+</h2>
+
+<mat-dialog-content>
+  <div class="dialog-form" [formGroup]="form">
+    <br>
+    <!-- CODIGO -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Código</mat-label>
+      <input matInput placeholder="Código del producto" formControlName="codigo" />
+      <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+        El código es requerido
+      </mat-error>
+    </mat-form-field>
+    <!-- CATEGORIA -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Categoría</mat-label>
+      <input matInput placeholder="Categoría" formControlName="categoria" />
+      <mat-error *ngIf="form.get('categoria')?.hasError('required')">
+        La categoría es requerida
+      </mat-error>
+    </mat-form-field>
+    <!-- TIPO -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Tipo</mat-label>
+      <input matInput placeholder="Tipo de producto" formControlName="tipo" />
+      <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+        El tipo es requerido
+      </mat-error>
+    </mat-form-field>
+    <!-- COLOR/TIPO -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Color/Tipo</mat-label>
+      <input matInput placeholder="Color o tipo" formControlName="color_tipo" />
+      <mat-error *ngIf="form.get('color_tipo')?.hasError('required')">
+        El color/tipo es requerido
+      </mat-error>
+    </mat-form-field>
+    <!-- TAMAÑO -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Tamaño</mat-label>
+      <input matInput placeholder="Tamaño" formControlName="tamano" />
+      <mat-error *ngIf="form.get('tamano')?.hasError('required')">
+        El tamaño es requerido
+      </mat-error>
+    </mat-form-field>
+    <!-- PARES POR CAJA -->
+    <mat-form-field appearance="outline" class="dialog-input">
+      <mat-label>Pares por caja</mat-label>
+      <input matInput type="number" placeholder="Cantidad de pares por caja" formControlName="pares_por_caja" min="1" />
+      <mat-error *ngIf="form.get('pares_por_caja')?.hasError('required')">
+        La cantidad es requerida
+      </mat-error>
+      <mat-error *ngIf="form.get('pares_por_caja')?.hasError('min')">
+        Debe ser al menos 1
+      </mat-error>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions> 
